@@ -1,0 +1,47 @@
+﻿@using DesafioCartSys.App.Extensions
+@model IEnumerable<DesafioCartSys.App.ViewModels.ClienteViewModel>
+
+@{
+    ViewData["Title"] = "Lista de Clientes";
+}
+
+<h1>@ViewData["Title"]</h1>
+<hr />
+<p>
+    <a class="btn btn-info"asp-action="Create">Novo Cliente</a>
+</p>
+<table class="table table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Documento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ativo)
+            </th>
+            <th></th>
+        </tr>
+    </thead="">
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @this.FormataDocumento(item.Documento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ativo)
+            </td>
+            <td class="text-right">
+                <a class="btn btn-warning"  asp-controller="Cliente" asp-action="Edit" asp-route-id="@item.Id"><span class="fa fa-pencil-alt"></span></a>
+                <a class="btn btn-danger"   asp-controller="Cliente"  asp-action="Delete" asp-route-id="@item.Id"><span class="fa fa-trash"></span></a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
